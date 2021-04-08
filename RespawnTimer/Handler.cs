@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Linq;
 using Qurre;
@@ -27,6 +27,7 @@ namespace RespawnTimer
 
         public void OnRoundStart()
         {
+            if (!plugin.cfg.IsEnabled) return;
             if(timerCoroutine.IsRunning)
             {
                 Timing.KillCoroutines(timerCoroutine);
