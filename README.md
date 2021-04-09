@@ -6,7 +6,7 @@ This plugin supports the SerpentsHand by Maniac Devil Knuckles. Original plugin 
 
 # Default config
 ```yml
-  respawn_timer_is_enabled: true
+  respawn_timer_enable: true
   # Should debug messages be shown in a server console?
   respawn_timer_debug: false
   # How often (in seconds) should timer be refreshed?
