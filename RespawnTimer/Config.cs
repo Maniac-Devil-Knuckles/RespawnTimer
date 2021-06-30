@@ -20,36 +20,36 @@ namespace RespawnTimer
 
         public bool ShowTimerOnlyOnSpawn { get; set; } = false;
 
-        public bool ShowNumberOfSpectators { get; set; } = true;
+        public bool ShowNumberOfSpectators { get; set; } = false;
 
-        public bool ShowTickets { get; set; } = true;
+        public bool ShowTickets { get; set; } = false;
 
         public Translations translations { get; set; } = new Translations();
 
         public void Load()
         {
-            IsEnabled = RespawnTimer.Config.GetBool("respawn_timer_enable", IsEnabled);
-            ShowDebugMessages = RespawnTimer.Config.GetBool("respawn_timer_debug", ShowDebugMessages);
-            Interval = RespawnTimer.Config.GetFloat("respawn_timer_interval", Interval);
-            TextLowering = RespawnTimer.Config.GetByte("respawn_timer_textlowering", TextLowering);
-            ShowMinutes = RespawnTimer.Config.GetBool("respawn_timer_showminutes", ShowMinutes);
-            ShowSeconds = RespawnTimer.Config.GetBool("respawn_timer_showseconds", ShowSeconds);
-            ShowTimerOnlyOnSpawn = RespawnTimer.Config.GetBool("respawn_timer_showtimeronlyonspawn", ShowTimerOnlyOnSpawn);
-            ShowNumberOfSpectators = RespawnTimer.Config.GetBool("respawn_timer_shownumberofspectators", ShowNumberOfSpectators);
-            ShowTickets = RespawnTimer.Config.GetBool("respawn_timer_showtickets", ShowTickets);
-            translations.Ci= RespawnTimer.Config.GetString("respawn_timer_translation_ci", translations.Ci);
-            translations.CiTickets = RespawnTimer.Config.GetString("respawn_timer_translation_citickets", translations.CiTickets);
-            translations.CiTicketsNum = RespawnTimer.Config.GetString("respawn_timer_translation_citicketsnum", translations.CiTicketsNum);
-            translations.Minutes = RespawnTimer.Config.GetString("respawn_timer_translation_minutes", translations.Minutes);
-            translations.Seconds = RespawnTimer.Config.GetString("respawn_timer_translation_seconds", translations.Seconds);
-            translations.Sh = RespawnTimer.Config.GetString("respawn_timer_translation_sh", translations.Sh);
-            translations.Spectators = RespawnTimer.Config.GetString("respawn_timer_translation_spectators", translations.Spectators);
-            translations.SpectatorsNum = RespawnTimer.Config.GetString("respawn_timer_translation_spectatorsnum", translations.SpectatorsNum);
-            translations.YouWillRespawnIn = RespawnTimer.Config.GetString("respawn_timer_translation_youwillrespawnin", translations.YouWillRespawnIn);
-            translations.YouWillSpawnAs = RespawnTimer.Config.GetString("respawn_timer_translation_youwillrespawnas", translations.YouWillSpawnAs);
-            translations.Ntf = RespawnTimer.Config.GetString("respawn_timer_translation_ntf", translations.Ntf);
-            translations.NtfTickets = RespawnTimer.Config.GetString("respawn_timer_translation_ntftickets", translations.NtfTickets);
-            translations.NtfTicketsNum = RespawnTimer.Config.GetString("respawn_timer_translation_ntfticketsnum", translations.NtfTicketsNum);
+            IsEnabled = Qurre.Plugin.Config.GetBool("respawn_timer_enable", IsEnabled, "is enabled?");
+            ShowDebugMessages = Qurre.Plugin.Config.GetBool("respawn_timer_debug", ShowDebugMessages, "show debug messages");  
+            Interval = Qurre.Plugin.Config.GetFloat("respawn_timer_interval", Interval, "interval betweeen show");
+            TextLowering = Qurre.Plugin.Config.GetByte("respawn_timer_textlowering", TextLowering, "But not upper");
+            ShowMinutes = Qurre.Plugin.Config.GetBool("respawn_timer_showminutes", ShowMinutes, "show minutes");
+            ShowSeconds = Qurre.Plugin.Config.GetBool("respawn_timer_showseconds", ShowSeconds, "show seconds");
+            ShowTimerOnlyOnSpawn = Qurre.Plugin.Config.GetBool("respawn_timer_showtimeronlyonspawn", ShowTimerOnlyOnSpawn, "?");
+            ShowNumberOfSpectators = Qurre.Plugin.Config.GetBool("respawn_timer_shownumberofspectators", ShowNumberOfSpectators, "Num");
+            ShowTickets = Qurre.Plugin.Config.GetBool("respawn_timer_showtickets", ShowTickets, "show tickets?");
+            translations.Ci= Qurre.Plugin.Config.GetString("respawn_timer_translation_ci", translations.Ci, "ci");
+            translations.CiTickets = Qurre.Plugin.Config.GetString("respawn_timer_translation_citickets", translations.CiTickets, "citickets");
+            translations.CiTicketsNum = Qurre.Plugin.Config.GetString("respawn_timer_translation_citicketsnum", translations.CiTicketsNum, "num");
+            translations.Minutes = Qurre.Plugin.Config.GetString("respawn_timer_translation_minutes", translations.Minutes);
+            translations.Seconds = Qurre.Plugin.Config.GetString("respawn_timer_translation_seconds", translations.Seconds);
+            translations.Sh = Qurre.Plugin.Config.GetString("respawn_timer_translation_sh", translations.Sh);
+            translations.Spectators = Qurre.Plugin.Config.GetString("respawn_timer_translation_spectators", translations.Spectators);
+            translations.SpectatorsNum = Qurre.Plugin.Config.GetString("respawn_timer_translation_spectatorsnum", translations.SpectatorsNum);
+            translations.YouWillRespawnIn = Qurre.Plugin.Config.GetString("respawn_timer_translation_youwillrespawnin", translations.YouWillRespawnIn);
+            translations.YouWillSpawnAs = Qurre.Plugin.Config.GetString("respawn_timer_translation_youwillrespawnas", translations.YouWillSpawnAs);
+            translations.Ntf = Qurre.Plugin.Config.GetString("respawn_timer_translation_ntf", translations.Ntf);
+            translations.NtfTickets = Qurre.Plugin.Config.GetString("respawn_timer_translation_ntftickets", translations.NtfTickets);
+            translations.NtfTicketsNum = Qurre.Plugin.Config.GetString("respawn_timer_translation_ntfticketsnum", translations.NtfTicketsNum);
         }
     }
 }

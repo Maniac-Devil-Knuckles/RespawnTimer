@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Linq;
 using Qurre;
@@ -13,40 +13,43 @@ namespace RespawnTimer
 {
     class Handler
     {
-        public static int TimeUntilRespawn => Mathf.RoundToInt(RespawnManager.Singleton._timeForNextSequence - (float)RespawnManager.Singleton._stopwatch.Elapsed.TotalSeconds);
-        public static bool IsSpawning => RespawnManager.Singleton._curSequence == RespawnManager.RespawnSequencePhase.PlayingEntryAnimations || RespawnManager.Singleton._curSequence == RespawnManager.RespawnSequencePhase.SpawningSelectedTeam;
+        //public static int TimeUntilRespawn => Mathf.RoundToInt(RespawnManager.Singleton._timeForNextSequence - (float)RespawnManager.Singleton._stopwatch.Elapsed.TotalSeconds);
+        public static int TimeUntilRespawn => Convert.ToInt32(Round.NextRespawn);
+        public static bool IsSpawning => RespawnManager.CurrentSequence() == RespawnManager.RespawnSequencePhase.PlayingEntryAnimations || RespawnManager.CurrentSequence() == RespawnManager.RespawnSequencePhase.SpawningSelectedTeam;
         private readonly RespawnTimer plugin;
         public Handler(RespawnTimer plugin) => this.plugin = plugin;
 
         CoroutineHandle timerCoroutine = new CoroutineHandle();
 
-        string text;
+        string text { get; set; }="";
 
-        List<Player> Spectators = new List<Player>();
+        List<Player> Spectators { get; set; } = new List<Player>();
 
+        bool started { get; set; } = false;
 
         public void OnRoundStart()
         {
-            if (!plugin.cfg.IsEnabled) return;
-            if(timerCoroutine.IsRunning)
+            Log.Info("started");
+            if(started)
             {
                 Timing.KillCoroutines(timerCoroutine);
             }
 
+            started = true;
+
             timerCoroutine = Timing.RunCoroutine(Timer());
 
-          if(plugin.cfg.ShowDebugMessages)  Log.Debug($"RespawnTimer coroutine started successfully! The timer will be refreshed every {plugin.cfg.Interval} second/s!");
+           //Log.Custom($"RespawnTimer coroutine started successfully! The timer will be refreshed every {plugin.cfg.Interval} second/s! {timerCoroutine.IsRunning}", "Debug",ConsoleColor.DarkBlue);
         }
 
         private IEnumerator<float> Timer()
         {
-            for(; ; )
+            for(; Round.Started ; )
             {
-                
                 yield return Timing.WaitForSeconds(plugin.cfg.Interval);
-                if (!Round.IsStarted) continue;
                 try
                 {
+                    //Log.Info("test");
                     if (!IsSpawning && plugin.cfg.ShowTimerOnlyOnSpawn) continue;
 
                     text = string.Empty;
@@ -56,6 +59,7 @@ namespace RespawnTimer
                     text += $"{plugin.cfg.translations.YouWillRespawnIn}\n";
 
 
+                   // Log.Info("test 2");
                     if (plugin.cfg.ShowMinutes) text += plugin.cfg.translations.Minutes;
                     if (plugin.cfg.ShowSeconds) text += plugin.cfg.translations.Seconds;
 
@@ -72,6 +76,7 @@ namespace RespawnTimer
                     }
                     else
                     {
+                      //  Log.Info("test 3");
                         if (plugin.cfg.ShowMinutes) text = text.Replace("{minutes}", $"{(TimeUntilRespawn + 15) / 60}");
 
                         if (plugin.cfg.ShowSeconds)
@@ -108,8 +113,8 @@ namespace RespawnTimer
                     Spectators = Player.Get(Team.RIP).ToList();
 
                     //if (RespawnTimer.assemblyGS)
-                      //  GhostSpectatorPlayers();
-
+                    //  GhostSpectatorPlayers();
+                   // Log.Info(text);
                     if (plugin.cfg.ShowNumberOfSpectators)
                     {
                         text += $"<align=right>{plugin.cfg.translations.Spectators} {plugin.cfg.translations.SpectatorsNum}\n</align>";
@@ -129,11 +134,12 @@ namespace RespawnTimer
 
                     foreach (Player ply in Spectators)
                     {
-                        ply.ShowHint(text,  plugin.cfg.Interval+0.3f);
+                        ply.ShowHint(text,  plugin.cfg.Interval + 0.3f);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Log.Error(ex);
                     continue;
                 }
             }
