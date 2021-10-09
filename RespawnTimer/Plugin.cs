@@ -27,19 +27,18 @@ namespace RespawnTimer
         {
             Singleton = this;
             cfg.Load();
-            Log.Info("Включен плагин");
             handler = new Handler(this);
            
             ServerEvent.Start += handler.OnRoundStart;
-
-            foreach (var plugin in PluginManager.plugins)
+            
+            /*foreach (var plugin in PluginManager.plugins)
                 {
                     if (plugin.Name == "SerpentsHand" && plugin.Developer == "Cyanox,Exported to Qurre by Maniac Devil Knuckles")
                     {
                         assemblySH = true;
                         if (cfg.ShowDebugMessages) Log.Debug("SerpentsHand plugin detected!");
                     }
-                }
+                }*/
         }
 
         public override void Disable()

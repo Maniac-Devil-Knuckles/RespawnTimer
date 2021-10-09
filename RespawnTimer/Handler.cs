@@ -29,7 +29,6 @@ namespace RespawnTimer
 
         public void OnRoundStart()
         {
-            Log.Info("started");
             if(started)
             {
                 Timing.KillCoroutines(timerCoroutine);
@@ -37,9 +36,7 @@ namespace RespawnTimer
 
             started = true;
 
-            timerCoroutine = Timing.RunCoroutine(Timer());
-
-           //Log.Custom($"RespawnTimer coroutine started successfully! The timer will be refreshed every {plugin.cfg.Interval} second/s! {timerCoroutine.IsRunning}", "Debug",ConsoleColor.DarkBlue);
+            timerCoroutine = Timer().RunCoroutine("respawntimer");
         }
 
         private IEnumerator<float> Timer()

@@ -43,7 +43,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Qurre">
-      <HintPath>..\packages\Qurre.1.5.1\lib\net472\Qurre.dll</HintPath>
+      <HintPath>..\packages\Qurre.1.9.0\lib\net472\Qurre.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp_publicized">
       <HintPath>..\..\Assembly-CSharp_publicized.dll</HintPath>
