@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "5CGQfFiR7UJs1kDVZGJG3QoFArU/5fxt99haF/uatVPqjNIZTj7xdcJQHJVwuTQeSoqndvZcdW0jqOyaO7OK9Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\knuck\\source\\repos\\RespawnTimerQurre\\RespawnTimerQurre\\RespawnTimerQurre.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\knuck\\.nuget\\packages\\qurre\\1.11.4\\qurre.1.11.4.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Qurre 1.11.4\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \"net6.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Qurre",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}
