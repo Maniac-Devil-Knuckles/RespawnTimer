@@ -5,36 +5,39 @@
 This plugin supports the SerpentsHand by Maniac Devil Knuckles. Original plugin by Michal78900
 
 # Default config
-```yml
-  respawn_timer_enable: true
-  # Should debug messages be shown in a server console?
-  respawn_timer_debug: false
-  # How often (in seconds) should timer be refreshed?
-  respawn_timer_interval: 1.5
-  # Should a timer be lower or higher on the screen? (values from 0 to 14, 0 - very high, 14 - very low)
-  respawn_timer_textlowering: 8
-  # Should a timer show an exact number of minutes?
-  respawn_timer_showminutes: true
-  # Should a timer show an exact number of seconds?
-  respawn_timer_showseconds: true
-  # Should a timer be only shown, when a spawnning sequence has begun? (NTF Helicopter / Chaos Car arrives)
-  respawn_timer_showtimeronlyonspawn: false
-  # Should number of spectators be shown?
-  respawn_timer_shownumberofspectators: true
-  # Should the NTF and CI respawn tickets be shown?
-  respawn_timer_showtickets: true
-  # Translations
-  respawn_timer_translation_youwillrespawnin: '<color=orange>You will respawn in: </color>'
-  respawn_timer_translation_youwillrespawnas: 'You will spawn as: '
-  respawn_timer_translation_ntf: <color=blue>Nine-Tailed Fox</color>
-  respawn_timer_translation_ci: <color=green>Chaos Insurgency</color>
-  respawn_timer_translation_sh: <color=red>Serpent's Hand</color>
-  respawn_timer_translation_spectators: '<color=#B3B6B7>Spectators: </color>'
-  respawn_timer_translation_ntftickets: '<color=blue>NTF Tickets: </color>'
-  respawn_timer_translation_citickets: '<color=green>CI Tickets: </color>'
-  respawn_timer_translation_seconds: ' <b>{seconds} seconds</b>'
-  respawn_timer_translation_minutes: <b>{minutes} minutes.</b>
-  respawn_timer_translation_spectatorsnum: '{spectators_num}'
-  respawn_timer_translation_ntfticketsnum: '{ntf_tickets_num}'
-  respawn_timer_translation_citicketsnum: '{ci_tickets_num}'
-  ```
+```yaml
+#is enabled?
+respawn_timer_enable: true
+#show debug messages
+respawn_timer_debug: false
+#interval betweeen show
+respawn_timer_interval: 1,5
+#But not upper
+respawn_timer_textlowering: 8
+#show minutes
+respawn_timer_showminutes: true
+#show seconds
+respawn_timer_showseconds: true
+#?
+respawn_timer_showtimeronlyonspawn: false
+#Num
+respawn_timer_shownumberofspectators: false
+#show tickets?
+respawn_timer_showtickets: false
+ ```
+#Translation in %appdata%\Qurre\Configs\Custom\RespawnTimer.yaml
+```yaml
+Name: RespawnTimer
+YouWillRespawnIn: '<color=orange>You will respawn in: </color>'
+YouWillSpawnAs: 'You will spawn as: '
+Ntf: <color=blue>Nine-Tailed Fox</color>
+Ci: <color=green>Chaos Insurgency</color>
+Spectators: '<color=#B3B6B7>Spectators: </color>'
+NtfTickets: '<color=blue>NTF Tickets: </color>'
+CiTickets: '<color=green>CI Tickets: </color>'
+Seconds: ' <b>{seconds} s</b>'
+Minutes: <b>{minutes} min.</b>
+SpectatorsNum: '{spectators_num}'
+NtfTicketsNum: '{ntf_tickets_num}'
+CiTicketsNum: '{ci_tickets_num}'
+```
