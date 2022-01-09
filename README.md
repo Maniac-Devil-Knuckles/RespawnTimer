@@ -25,7 +25,7 @@ respawn_timer_shownumberofspectators: false
 #show tickets?
 respawn_timer_showtickets: false
  ```
-#Translation in %appdata%\Qurre\Configs\Custom\RespawnTimer.yaml
+# Translation in %appdata%\Qurre\Configs\Custom\RespawnTimer.yaml
 ```yaml
 Name: RespawnTimer
 YouWillRespawnIn: '<color=orange>You will respawn in: </color>'
