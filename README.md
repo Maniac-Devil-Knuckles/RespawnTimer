@@ -3,41 +3,31 @@
 # RespawnTimer
 
 This plugin supports the SerpentsHand by Maniac Devil Knuckles. Original plugin by Michal78900
-
+Config in %appdata%\Qurre\Configs\Custom\RespawnTimer-7777.yaml on windows or in ~/.config/Qurre/Configs/Custom/RespawnTimer-7777.yaml on Linux
 # Default config
 ```yaml
-#is enabled?
-respawn_timer_enable: true
-#show debug messages
-respawn_timer_debug: false
-#interval betweeen show
-respawn_timer_interval: 1,5
-#But not upper
-respawn_timer_textlowering: 8
-#show minutes
-respawn_timer_showminutes: true
-#show seconds
-respawn_timer_showseconds: true
-#?
-respawn_timer_showtimeronlyonspawn: false
-#Num
-respawn_timer_shownumberofspectators: false
-#show tickets?
-respawn_timer_showtickets: false
- ```
-# Translation in %appdata%\Qurre\Configs\Custom\RespawnTimer.yaml
-```yaml
 Name: RespawnTimer
-YouWillRespawnIn: '<color=orange>You will respawn in: </color>'
-YouWillSpawnAs: 'You will spawn as: '
-Ntf: <color=blue>Nine-Tailed Fox</color>
-Ci: <color=green>Chaos Insurgency</color>
-Spectators: '<color=#B3B6B7>Spectators: </color>'
-NtfTickets: '<color=blue>NTF Tickets: </color>'
-CiTickets: '<color=green>CI Tickets: </color>'
-Seconds: ' <b>{seconds} s</b>'
-Minutes: <b>{minutes} min.</b>
-SpectatorsNum: '{spectators_num}'
-NtfTicketsNum: '{ntf_tickets_num}'
-CiTicketsNum: '{ci_tickets_num}'
-```
+IsEnabled: true
+ShowDebugMessages: false
+Interval: 1.20000005
+TextLowering: 8
+ShowMinutes: true
+ShowSeconds: true
+ShowTimerOnlyOnSpawn: false
+ShowNumberOfSpectators: false
+ShowTickets: false
+translations:
+  YouWillRespawnIn: <color=orange>You will respawn in </color>
+  YouWillSpawnAs: 'You will be spawned as '
+  Ntf: <color=blue>NTF</color>
+  Ci: <color=green>Chaos Insurgency</color>
+  Sh: <color=red>Serpents Hand</color>
+  Spectators: '<color=#B3B6B7>Spectators: </color>'
+  NtfTickets: '<color=blue>NTF Tickets: </color>'
+  CiTickets: '<color=green>CI Tickets: </color>'
+  Seconds: ' <b>{seconds} seconds</b>'
+  Minutes: <b>{minutes} minutes.</b>
+  SpectatorsNum: '{spectators_num}'
+  NtfTicketsNum: '{ntf_tickets_num}'
+  CiTicketsNum: '{ci_tickets_num}'
+ ```
