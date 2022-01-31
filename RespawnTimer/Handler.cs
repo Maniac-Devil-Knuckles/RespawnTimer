@@ -117,7 +117,7 @@ namespace RespawnTimer
 
                     foreach (Player ply in Spectators)
                     {
-                        ply.ShowHint(text,  CustomConfig.Interval + 0.3f);
+                        ply.HintDisplay.Show(new Hints.TextHint(text, new Hints.HintParameter[] { new Hints.StringHintParameter("") }, null, CustomConfig.Interval + 0.3f));
                     }
                 }
                 catch (Exception ex)
