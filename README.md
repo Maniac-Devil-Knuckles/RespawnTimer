@@ -9,7 +9,7 @@ Config in %appdata%\Qurre\Configs\Custom\RespawnTimer-7777.yaml on windows or in
 Name: RespawnTimer
 IsEnabled: true
 ShowDebugMessages: false
-Interval: 1.20000005
+Interval: 1
 TextLowering: 8
 ShowMinutes: true
 ShowSeconds: true
