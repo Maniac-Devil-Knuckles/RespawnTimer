@@ -22,8 +22,6 @@ namespace RespawnTimer
 
         private Handler handler;
 
-        internal static bool assemblySH { get; set; } = false;
-
         public override void Enable()
         {
             CustomConfigs.Add(CustomConfig);
