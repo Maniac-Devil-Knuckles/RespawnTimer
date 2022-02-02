@@ -3,6 +3,7 @@
 # RespawnTimer
 
 This plugin supports the SerpentsHand by Maniac Devil Knuckles. Original plugin by Michal78900
+
 Config in %appdata%\Qurre\Configs\Custom\RespawnTimer-7777.yaml on windows or in ~/.config/Qurre/Configs/Custom/RespawnTimer-7777.yaml on Linux
 # Default config
 ```yaml
