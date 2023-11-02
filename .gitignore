@@ -1,0 +1,14 @@
+
+*.json
+.vs/RespawnTImer/FileContentIndex/a7241ac3-2694-4a31-95b7-3eb0544b53e8.vsidx
+.vs/RespawnTImer/v17/.suo
+*.p7s
+*.dll
+*.pdb
+RespawnTimer/obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+RespawnTimer/obj/Debug/RespawnTImer.csproj.AssemblyReference.cache
+*.txt
+*.cache
+RespawnTimer/obj/Release/RespawnTImer.csproj.CopyComplete
+RespawnTimer/obj/Release/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+RespawnTimer/obj/Release/.NETFramework,Version=v4.8.AssemblyAttributes.cs

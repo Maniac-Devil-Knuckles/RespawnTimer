@@ -5,27 +5,30 @@ using Qurre.API;
 using System.Collections.Generic;
 using MEC;
 using Respawning;
+using Qurre.Events.Structs;
+using Qurre.Events;
+using Qurre.API.Attributes;
 
 namespace RespawnTimer
 {
-    class Handler
+    internal static class Handler
     {
-        List<Player> Spectators = new List<Player>();
+        internal static List<Player> Spectators = new List<Player>();
 
         public static int TimeUntilRespawn => Convert.ToInt32(Round.NextRespawn);
 
         public static bool IsSpawning => RespawnManager.CurrentSequence() == RespawnManager.RespawnSequencePhase.PlayingEntryAnimations || RespawnManager.CurrentSequence() == RespawnManager.RespawnSequencePhase.SpawningSelectedTeam;
 
-        private readonly Config CustomConfig;
 
-        public Handler(Config CustomConfig) => this.CustomConfig = CustomConfig;
+        static CoroutineHandle timerCoroutine = new CoroutineHandle();
 
-        CoroutineHandle timerCoroutine = new CoroutineHandle();
+        static string text { get; set; } = "";
 
-        string text { get; set; } = "";
-
-        public void OnRoundStart()
+        [EventMethod(RoundEvents.Start)]
+        internal static  void OnRoundStart(RoundStartedEvent ev)
         {
+            Config.Reload();
+            if (!Config.IsEnabled) return;
             if (timerCoroutine.IsRunning)
             {
                 Timing.KillCoroutines(timerCoroutine);
@@ -34,43 +37,43 @@ namespace RespawnTimer
             timerCoroutine = Timer().RunCoroutine("respawntimer");
         }
 
-        private IEnumerator<float> Timer()
+        private static IEnumerator<float> Timer()
         {
             for(; Round.Started ; )
             {
-                yield return Timing.WaitForSeconds(CustomConfig.Interval);
+                yield return Timing.WaitForSeconds(Config.Interval);
                 try
                 {
-                    if (!IsSpawning && CustomConfig.ShowTimerOnlyOnSpawn) continue;
+                    if (!IsSpawning && Config.ShowTimerOnlyOnSpawn) continue;
 
                     text = string.Empty;
 
-                    text += new string('\n', CustomConfig.TextLowering);
+                    text += new string('\n', Config.TextLowering);
 
-                    text += $"{CustomConfig.translations.YouWillRespawnIn}\n";
+                    text += $"{Config.translations.YouWillRespawnIn}\n";
 
-                    if (CustomConfig.ShowMinutes) text += CustomConfig.translations.Minutes;
+                    if (Config.ShowMinutes) text += Config.translations.Minutes;
 
-                    if (CustomConfig.ShowSeconds) text += CustomConfig.translations.Seconds;
+                    if (Config.ShowSeconds) text += Config.translations.Seconds;
 
                     if (IsSpawning)
                     {
-                        if (CustomConfig.ShowMinutes) text = text.Replace("{minutes}", (TimeUntilRespawn / 60).ToString()); ;
+                        if (Config.ShowMinutes) text = text.Replace("{minutes}", (TimeUntilRespawn / 60).ToString()); ;
 
-                        if (CustomConfig.ShowSeconds)
+                        if (Config.ShowSeconds)
                         {
-                            if (CustomConfig.ShowMinutes) text = text.Replace("{seconds}", (TimeUntilRespawn % 60).ToString());
+                            if (Config.ShowMinutes) text = text.Replace("{seconds}", (TimeUntilRespawn % 60).ToString());
 
                             else text = text.Replace("{seconds}", TimeUntilRespawn.ToString());
                         }
                     }
                     else
                     {
-                        if (CustomConfig.ShowMinutes) text = text.Replace("{minutes}", $"{(TimeUntilRespawn + 15) / 60}");
+                        if (Config.ShowMinutes) text = text.Replace("{minutes}", $"{(TimeUntilRespawn + 15) / 60}");
 
-                        if (CustomConfig.ShowSeconds)
+                        if (Config.ShowSeconds)
                         {
-                            if (CustomConfig.ShowMinutes) text = text.Replace("{seconds}", $"{(TimeUntilRespawn + 15) % 60}");
+                            if (Config.ShowMinutes) text = text.Replace("{seconds}", $"{(TimeUntilRespawn + 15) % 60}");
 
                             else text = text.Replace("{seconds}", $"{(TimeUntilRespawn + 15) % 60}");
                         }
@@ -80,44 +83,44 @@ namespace RespawnTimer
 
                     if (RespawnManager.Singleton.NextKnownTeam != SpawnableTeamType.None)
                     {
-                        text += CustomConfig.translations.YouWillSpawnAs;
+                        text += Config.translations.YouWillSpawnAs;
 
                         if (RespawnManager.Singleton.NextKnownTeam == SpawnableTeamType.NineTailedFox)
                         {
-                            text += CustomConfig.translations.Ntf;
+                            text += Config.translations.Ntf;
 
                         }
                         else
                         {
-                            text += CustomConfig.translations.Ci;
+                            text += Config.translations.Ci;
                         }
                     }
 
-                    text += new string('\n', 14 - CustomConfig.TextLowering - Convert.ToInt32(CustomConfig.ShowNumberOfSpectators));
+                    text += new string('\n', 14 - Config.TextLowering - Convert.ToInt32(Config.ShowNumberOfSpectators));
 
 
-                    Spectators = Player.Get(Team.RIP).ToList();
+                    Spectators = Player.List.Where(p=> p.RoleInfomation.Team== PlayerRoles.Team.Dead).ToList();
 
-                    if (CustomConfig.ShowNumberOfSpectators)
+                    if (Config.ShowNumberOfSpectators)
                     {
-                        text += $"<align=right>{CustomConfig.translations.Spectators} {CustomConfig.translations.SpectatorsNum}\n</align>";
+                        text += $"<align=right>{Config.translations.Spectators} {Config.translations.SpectatorsNum}\n</align>";
                         text = text.Replace("{spectators_num}", Spectators.Count().ToString());
                     }
 
-                    if (CustomConfig.ShowTickets)
+                    if (Config.ShowTickets)
                     {
-                        text += $"<align=right>{CustomConfig.translations.NtfTickets} {CustomConfig.translations.NtfTicketsNum}</align>" +
-                                    $"\n<align=right>{CustomConfig.translations.CiTickets} {CustomConfig.translations.CiTicketsNum}</align>";
+                        text += $"<align=right>{Config.translations.NtfTickets} {Config.translations.NtfTicketsNum}</align>" +
+                                    $"\n<align=right>{Config.translations.CiTickets} {Config.translations.CiTicketsNum}</align>";
 
 
-                        text = text.Replace("{ntf_tickets_num}", RespawnTickets.Singleton.GetAvailableTickets(SpawnableTeamType.NineTailedFox).ToString());
-                        text = text.Replace("{ci_tickets_num}", RespawnTickets.Singleton.GetAvailableTickets(SpawnableTeamType.ChaosInsurgency).ToString());
+                        text = text.Replace("{ntf_tickets_num}", RespawnTokensManager.GetTeamDominance(SpawnableTeamType.NineTailedFox).ToString());
+                        text = text.Replace("{ci_tickets_num}", RespawnTokensManager.GetTeamDominance(SpawnableTeamType.ChaosInsurgency).ToString());
                     }   
                     
 
                     foreach (Player ply in Spectators)
                     {
-                        ply.HintDisplay.Show(new Hints.TextHint(text, new Hints.HintParameter[] { new Hints.StringHintParameter("") }, null, CustomConfig.Interval + 0.3f));
+                        ply.Client.HintDisplay.Show(new Hints.TextHint(text, new Hints.HintParameter[] { new Hints.StringHintParameter("") }, null, Config.Interval + 0.3f));
                     }
                 }
                 catch (Exception ex)

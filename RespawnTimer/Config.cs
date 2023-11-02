@@ -2,28 +2,43 @@
 
 namespace RespawnTimer
 {
-    public class Config : IConfig
+    internal static class Config
     {
-        public string Name { get; set; } = "RespawnTimer";
+        internal static bool IsEnabled { get; set; } = true;
 
-        public bool IsEnabled { get; set; } = true;
+        internal static bool ShowDebugMessages { get; set; } = false;
 
-        public bool ShowDebugMessages { get; set; } = false;
+        internal static float Interval { get; set; } = 1.5f;
 
-        public float Interval { get; set; } = 1.5f;
+        internal static byte TextLowering { get; set; } = 8;
 
-        public byte TextLowering { get; set; } = 8;
+        internal static bool ShowMinutes { get; set; } = true;
 
-        public bool ShowMinutes { get; set; } = true;
+        internal static bool ShowSeconds { get; set; } = true;
 
-        public bool ShowSeconds { get; set; } = true;
+        internal static bool ShowTimerOnlyOnSpawn { get; set; } = false;
 
-        public bool ShowTimerOnlyOnSpawn { get; set; } = false;
+        internal static bool ShowNumberOfSpectators { get; set; } = false;
 
-        public bool ShowNumberOfSpectators { get; set; } = false;
+        internal static bool ShowTickets { get; set; } = false;
 
-        public bool ShowTickets { get; set; } = false;
+        internal static Translations translations { get; set; } = new Translations();
 
-        public Translations translations { get; set; } = new Translations();
+        private static JsonConfig jsonConfig = new JsonConfig("RespawnTimer");
+
+        internal static void Reload() 
+        {
+            IsEnabled = jsonConfig.SafeGetValue("IsEnabled", IsEnabled);
+            ShowDebugMessages = jsonConfig.SafeGetValue("ShowDebugMessages", ShowDebugMessages);
+            Interval = jsonConfig.SafeGetValue("Interval", Interval);
+            TextLowering = jsonConfig.SafeGetValue("TextLowering", TextLowering);
+            ShowMinutes = jsonConfig.SafeGetValue("ShowMinutes", ShowMinutes);
+            ShowSeconds = jsonConfig.SafeGetValue("ShowSeconds", ShowSeconds);
+            ShowTimerOnlyOnSpawn = jsonConfig.SafeGetValue("ShowTimerOnlyOnSpawn", ShowTimerOnlyOnSpawn);
+            ShowNumberOfSpectators = jsonConfig.SafeGetValue("ShowNumberOfSpectators", ShowNumberOfSpectators);
+            ShowTickets = jsonConfig.SafeGetValue("ShowTickets", ShowTickets);
+            translations = jsonConfig.SafeGetValue("translations", new Translations());
+        }
+
     }
 }
