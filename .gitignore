@@ -12,3 +12,8 @@ RespawnTimer/obj/Debug/RespawnTImer.csproj.AssemblyReference.cache
 RespawnTimer/obj/Release/RespawnTImer.csproj.CopyComplete
 RespawnTimer/obj/Release/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
 RespawnTimer/obj/Release/.NETFramework,Version=v4.8.AssemblyAttributes.cs
+*.nupkg
+.vs/RespawnTImer/FileContentIndex/de4a87f1-81ab-4788-b9a7-d968ee866180.vsidx
+packages/Qurre.1.11.11/content/qurre_ol.ico
+packages/Qurre.1.11.11/images/qurre_ol.png
+*.xml
